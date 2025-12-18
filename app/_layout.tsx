@@ -1,13 +1,29 @@
 import { LogBox } from 'react-native';
 
-// Silenciar warnings específicos ANTES que cualquier otra importación
+// Configuración de LogBox más agresiva - SILENCIAR TODOS los warnings de SafeAreaView
 LogBox.ignoreLogs([
+  "SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/th3rdwave/react-native-safe-area-context",
   'SafeAreaView has been deprecated and will be removed in a future release',
   'SafeAreaView has been deprecated',
+  'SafeAreaView',
   'react-native-safe-area-context',
-  /SafeAreaView.*deprecated/,
-  /deprecated.*SafeAreaView/,
 ]);
+
+// Configuración global para suprimir warnings específicos
+if (__DEV__) {
+  const originalWarn = console.warn;
+  console.warn = (message, ...args) => {
+    if (
+      typeof message === 'string' &&
+      (message.includes('SafeAreaView') ||
+        message.includes('deprecated') ||
+        message.includes('react-native-safe-area-context'))
+    ) {
+      return; // Silenciar estos warnings
+    }
+    originalWarn(message, ...args);
+  };
+}
 
 // Forzar recarga del LogBox
 LogBox.install();
