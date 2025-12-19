@@ -1,5 +1,4 @@
 import { ExternalLink } from '@/components/external-link';
-import LanguageSelector from '@/components/language-selector';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -8,11 +7,10 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, useColorScheme } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export default function TabTwoScreen() {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme();
 
   return (
     <ParallaxScrollView
@@ -34,7 +32,6 @@ export default function TabTwoScreen() {
           {t('exploreTitle')}
         </ThemedText>
       </ThemedView>
-      <LanguageSelector isDark={colorScheme === 'dark'} />
       <ThemedText>{t('exploreDescription')}</ThemedText>
       <Collapsible title={t('fileBasedRouting')}>
         <ThemedText>

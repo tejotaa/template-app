@@ -28,7 +28,8 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">{t('step1')}</ThemedText>
         <ThemedText>
-          {t('editFile')} <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> Press{' '}
+          {t('editFile')} <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{' '}
+          {t('editIndexFile')} Press{' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
               ios: 'cmd + d',

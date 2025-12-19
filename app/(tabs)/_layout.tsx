@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
-
+import LanguageSelector from '@/components/language-selector';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -17,8 +17,19 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme === 'dark' ? 'dark' : 'light'].tint,
-        headerShown: false,
+        headerShown: true,
         tabBarButton: HapticTab,
+        headerStyle: {
+          backgroundColor: Colors[colorScheme === 'dark' ? 'dark' : 'light'].background,
+        },
+        headerTitleStyle: {
+          color: Colors[colorScheme === 'dark' ? 'dark' : 'light'].text,
+        },
+        headerRight: () => (
+          <View style={styles.headerRight}>
+            <LanguageSelector isDark={colorScheme === 'dark'} />
+          </View>
+        ),
       }}>
       <Tabs.Screen
         name="index"
@@ -37,3 +48,9 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  headerRight: {
+    marginRight: 15,
+  },
+});
