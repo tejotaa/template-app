@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useTranslation } from 'react-i18next';
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Easing, Notifier, NotifierComponents } from 'react-native-notifier';
 
@@ -9,6 +10,8 @@ import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -19,14 +22,13 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">{t('welcome')}</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">{t('step1')}</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
+          {t('editFile')} <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> Press{' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
               ios: 'cmd + d',
@@ -34,13 +36,13 @@ export default function HomeScreen() {
               web: 'F12',
             })}
           </ThemedText>{' '}
-          to open developer tools.
+          {t('pressDeveloperTools')}.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <Link href="/modal">
           <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore (click)</ThemedText>
+            <ThemedText type="subtitle">{t('step2')}</ThemedText>
           </Link.Trigger>
           <Link.Preview />
           <Link.Menu>
@@ -61,13 +63,11 @@ export default function HomeScreen() {
           </Link.Menu>
         </Link>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
+        <ThemedText>{t('tapExploreTab')}</ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Prueba las Notificaciones</ThemedText>
-        <ThemedText>Toca los botones para ver diferentes tipos de notificaciones:</ThemedText>
+        <ThemedText type="subtitle">{t('step3')}</ThemedText>
+        <ThemedText>{t('tryNotifications')}</ThemedText>
 
         <View style={styles.notificationButtonsContainer}>
           <TouchableOpacity
@@ -75,7 +75,7 @@ export default function HomeScreen() {
             onPress={() => {
               Notifier.showNotification({
                 title: '',
-                description: 'Hello! Can you help me with notifications?',
+                description: t('notificationTitle'),
                 duration: 0,
                 showAnimationDuration: 800,
                 showEasing: Easing.bounce,
@@ -83,15 +83,15 @@ export default function HomeScreen() {
               });
             }}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Notificación Personalizada
+              {t('customNotification')}
             </ThemedText>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.successButton}
             onPress={() => {
               Notifier.showNotification({
-                title: 'Éxito',
-                description: 'Esta es una notificación de éxito',
+                title: t('successTitle'),
+                description: t('successDescription'),
                 Component: NotifierComponents.Alert,
                 componentProps: {
                   alertType: 'success',
@@ -99,15 +99,15 @@ export default function HomeScreen() {
               });
             }}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Notificación de Éxito
+              {t('successNotification')}
             </ThemedText>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
               Notifier.showNotification({
-                title: 'Error',
-                description: 'Algo salió mal, por favor intenta de nuevo',
+                title: t('errorTitle'),
+                description: t('errorDescription'),
                 Component: NotifierComponents.Alert,
                 componentProps: {
                   alertType: 'error',
@@ -115,15 +115,15 @@ export default function HomeScreen() {
               });
             }}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Notificación de Error
+              {t('errorNotification')}
             </ThemedText>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.warningButton}
             onPress={() => {
               Notifier.showNotification({
-                title: 'Advertencia',
-                description: 'Esta es una notificación de advertencia',
+                title: t('warningTitle'),
+                description: t('warningDescription'),
                 Component: NotifierComponents.Alert,
                 componentProps: {
                   alertType: 'warn',
@@ -131,15 +131,15 @@ export default function HomeScreen() {
               });
             }}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Notificación de Advertencia
+              {t('warningNotification')}
             </ThemedText>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.infoButton}
             onPress={() => {
               Notifier.showNotification({
-                title: 'Información',
-                description: 'Nueva información disponible',
+                title: t('infoTitle'),
+                description: t('infoDescription'),
                 Component: NotifierComponents.Alert,
                 componentProps: {
                   alertType: 'info',
@@ -147,19 +147,18 @@ export default function HomeScreen() {
               });
             }}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Notificación de Info
+              {t('infoNotification')}
             </ThemedText>
           </TouchableOpacity>
         </View>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 4: Get a fresh start</ThemedText>
+        <ThemedText type="subtitle">{t('step4')}</ThemedText>
         <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
+          {t('resetProject')} <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{' '}
+          {t('toGetFresh')} <ThemedText type="defaultSemiBold">app</ThemedText> {t('fresh')}{' '}
+          <ThemedText type="defaultSemiBold">app</ThemedText> {t('toCurrent')}{' '}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>

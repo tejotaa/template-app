@@ -36,6 +36,9 @@ import { NotifierWrapper } from 'react-native-notifier';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// Importar la configuración de i18next
+import '@/translation';
+
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export const unstable_settings = {
